@@ -46,6 +46,17 @@ class PostController extends Controller
         $this->post->description = $request->description;
         $this->post->image = 'data:image/'. $request->image->extension() . ';base64'. base64_encode(file_get_contents($request->image)); // converting an uploaded image into text and saving to database
         $this->post->save();
+
+
+        // converting index array from form into associative array
+       foreach($request->category as $category_id):
+            $category_post[] = ["category_id" => $category_id];
+       endforeach;
+
+       return $category_post;
+
+
+
     }
 
     /**
