@@ -3,7 +3,7 @@
 
 @section('content')
     {{-- Actity - create UI for create post --}}
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="" class="form-label fw-bold d-block">

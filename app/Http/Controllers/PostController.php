@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -43,7 +44,7 @@ class PostController extends Controller
         //
         $this->post->user_id = Auth::user()->id;
         $this->post->description = $request->description;
-        $this->post->image = 'data:image/'. $request->image->extension() . ';base64'. base64_encode(file_get_contents($request->image));
+        $this->post->image = 'data:image/'. $request->image->extension() . ';base64'. base64_encode(file_get_contents($request->image)); // converting an uploaded image into text and saving to database
         $this->post->save();
     }
 
