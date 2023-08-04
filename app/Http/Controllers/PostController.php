@@ -41,6 +41,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $this->post->user_id = Auth::user()->id;
+        $this->post->description = $request->description;
+        $this->post->image = 'data:image/'. $request->image->extension() . ';base64'. base64_encode(file_get_contents($request->image));
+        $this->post->save();
     }
 
     /**
