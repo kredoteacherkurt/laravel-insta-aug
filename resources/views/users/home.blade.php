@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-8 bg-warning">
-            Posts
+        <div class="col-8">
+          
         </div>
         <div class="col-4 bg-secondary">
             {{-- profile overview --}}
