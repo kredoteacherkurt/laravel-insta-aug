@@ -61,9 +61,12 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
         //
+        $post = $this->post->findOrFail($id);
+
+        return view('users.post.show')->with('post', $post);
     }
 
     /**

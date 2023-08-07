@@ -1,5 +1,5 @@
 <div class="container p-0">
-    <a href="">
+    <a href="{{route('post.show',$post->id)}}">
         <img src="{{ $post->image }}" class="w-100" alt="{{ $post->image }}">
     </a>
 </div>

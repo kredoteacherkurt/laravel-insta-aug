@@ -105,7 +105,7 @@
                     {{-- admin controls :3rd week --}}
                 {{-- </div> --}}
 
-                <div class="col-9">
+                <div class="col-7">
                     @yield('content')
                 </div>
            </div>
