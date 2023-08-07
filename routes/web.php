@@ -23,7 +23,6 @@ Auth::routes();
 
 Route::group(["middleware" => "auth"], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::get('/posts/create',[PostController::class,'create'])->name('post.create');
-    Route::post('/post/store',[PostController::class,'store'])->name('post.store');
-    Route::get('/posts/show/{id}',[PostController::class,'show'])->name('post.show');
+    Route::resource('/post',PostController::class);
+
 });

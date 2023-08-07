@@ -64,17 +64,33 @@ class PostController extends Controller
     public function show($id)
     {
         //
+
         $post = $this->post->findOrFail($id);
 
-        return view('users.post.show')->with('post', $post);
+        return view('users.post.show')
+                ->with('post', $post);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         //
+        $all_categories = $this->category->all();
+        $post = $this->post->findOrFail($id);
+        $selected_categories = [];
+    //    getting the category ID
+        foreach($post->categoryPost as $category_post):
+            $selected_categories[] = $category_post->category_id;
+        endforeach;
+
+
+
+        return view('users.post.edit')
+                ->with('post', $post)
+                ->with('all_categories', $all_categories)
+                ->with('selected_categories', $selected_categories);
     }
 
     /**
