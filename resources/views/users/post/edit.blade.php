@@ -3,8 +3,9 @@
 
 @section('content')
     {{-- Actity - create UI for create post --}}
-    <form action="#" method="post" enctype="multipart/form-data">
+    <form action="{{route('post.update',$post->id)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
         <div class="mb-3">
             <label for="" class="form-label fw-bold d-block">
                 Categories

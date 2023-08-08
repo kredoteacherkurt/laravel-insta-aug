@@ -96,9 +96,39 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
+
+        $post = $this->post->findOrFail($id);
+        $post->description = $request->description;
+
+
+        if ($request->image){
+
+            $post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+
+
+        }
+
+        $post->save();
+
+
+        $post->categoryPost()->delete();
+
+
+
+        foreach ($request->category as $category_id){
+            $category_post[] = ['category_id' => $category_id];
+        }
+        $post->categoryPost()->createMany($category_post);
+
+        return redirect()->route('post.show', $id);
+
+
+
+
+
     }
 
     /**
