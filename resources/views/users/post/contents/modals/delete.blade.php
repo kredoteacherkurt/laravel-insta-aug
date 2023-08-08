@@ -10,11 +10,11 @@
                 <p>Are you sure you want to delete?</p>
             </div>
             <div class="modal-footer">
-                <form action="" method="post">
+                <form action="{{route('post.destroy',$post->id)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="btn btn-sm btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
             </div>
         </div>
