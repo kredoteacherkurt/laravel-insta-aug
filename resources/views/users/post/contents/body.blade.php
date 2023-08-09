@@ -29,5 +29,5 @@
         </div>
 
     </div>
-    {{-- include comments --}}
+   @include('users.post.contents.comment')
 </div>
