@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class LikeController extends Controller
 {
-    private $comment;
-
-    public function __construct(Comment $comment)
+    private $like;
+    public function __construct(Like $like)
     {
-        $this->comment = $comment;
+        $this->like = $like;
     }
     /**
      * Display a listing of the resource.
@@ -36,11 +35,9 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
-        $this->comment->user_id = Auth::user()->id;
-        $this->comment->post_id = $request->post_id;
-        $this->comment->body = $request->body;
-
-        $this->comment->save();
+        $this->like->user_id = Auth::user()->id;
+        $this->like->post_id = $request->post_id;
+        $this->like->save();
 
         return redirect()->back();
 
@@ -49,7 +46,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(Like $like)
     {
         //
     }
@@ -57,7 +54,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
+    public function edit(Like $like)
     {
         //
     }
@@ -65,7 +62,7 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Like $like)
     {
         //
     }
@@ -73,11 +70,8 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Like $like)
     {
         //
-        $this->comment->destroy($id);
-
-        return redirect()->back();
     }
 }
