@@ -70,8 +70,10 @@ class LikeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Like $like)
+    public function destroy($post_id)
     {
         //
+        $this->like->where('user_id',Auth::user()->id)->where('post_id',$post_id)->delete();
+        return redirect()->back();
     }
 }
