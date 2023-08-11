@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,6 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('/post',PostController::class);
     Route::resource('/comment', CommentController::class);
     Route::resource('/like',LikeController::class);
+    Route::resource('/profile', ProfileController::class);
 
 });
