@@ -38,12 +38,15 @@
                 {{-- Ternary Operator ~~ condition ? true : false --}}
             </div>
             <div class="col-auto">
-                <strong class="fw-bold">{{ $user->followers->count() }}</strong> <a href="{{route('follower.show',$user->id)}}" class="text-dark text-decoration-none">
+                <strong class="fw-bold">{{ $user->followers->count() }}</strong>
+                 <a href="{{route('follower.show',$user->id)}}" class="text-dark text-decoration-none">
                     {{ $user->followers->count() == 1 ? 'Follower' : 'Followers' }}
                 </a>
             </div>
             <div class="col-auto">
-                <strong class="fw-bold">{{ $user->following->count() }}</strong> Following
+                <strong class="fw-bold">{{ $user->following->count() }}</strong> <a href="{{route('following.show',$user->id)}}" class="text-decoration-none text-dark">
+                Following
+            </a>
             </div>
         </div>
         <p class="fw-bold">{{ $user->introduction }}</p>

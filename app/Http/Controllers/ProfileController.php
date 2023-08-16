@@ -96,4 +96,9 @@ class ProfileController extends Controller
 
        return view('users.profile.followers')->with('user',$user);
     }
+    public function following($id){
+        $user =  $this->user->findOrFail($id);
+
+        return view('users.profile.following')->with('user',$user);
+    }
 }

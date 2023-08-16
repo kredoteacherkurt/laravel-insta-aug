@@ -48,4 +48,5 @@ Route::group(["middleware" => "auth"], function(){
    Route::resource('/follow', FollowController::class);
 
    Route::get('/followers/{id}/show',[ProfileController::class,'followers'])->name('follower.show');
+   Route::get('/following/{id}/show',[ProfileController::class,'following'])->name('following.show');
 });
