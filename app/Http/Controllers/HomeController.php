@@ -49,4 +49,8 @@ class HomeController extends Controller
 
         return $home_posts;
     }
+    public function getSuggestedUsers(){
+        //1. create a new method inside home contnroller
+        //2. pass the data to home.blade.php
+    }
 }

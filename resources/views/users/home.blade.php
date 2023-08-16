@@ -9,7 +9,7 @@
                 <div class="card mb-4">
                     @include('users.post.contents.title')
                     @include('users.post.contents.body')
-                </div>         
+                </div>
             @empty
             <div class="text-center">
                 <h2>Share Photes</h2>
@@ -18,7 +18,7 @@
             </div>
             @endforelse
         </div>
-        <div class="col-4 bg-secondary">
+        <div class="col-4">
             {{-- profile overview --}}
             Profile overview
 
