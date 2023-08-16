@@ -19,12 +19,48 @@
             @endforelse
         </div>
         <div class="col-4">
-            {{-- profile overview --}}
-            Profile overview
+            <div class="row align-items-center mb-5 bg-white shadow-sm rounded-3 py-3">
 
-            {{-- suggested users --}}
-            Suggested Users
+            </div>
+            @if ($suggested_users)
+                <div class="row">
+                    <div class="col-auto">
+                        <p class="fw-bold text-secondary">
+                            Suggestions for you
+                        </p>
+                    </div>
+                    <div class="col text-end">
+                        <a href="#" class="text-decoration-none">See all</a>
+                    </div>
+                </div>
+
+                @foreach ($suggested_users as $user)
+                    <div class="row align-items-center mb-3">
+                        <div class="col-auto">
+                            @if ($user->avatar)
+                                <img src="{{$user->avatar}}" alt="" class="rounded-circle avatar-sm ">
+                            @else
+                                <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
+                            @endif
+                        </div>
+                        <div class="col ps-0 text-truncate">
+                            <a href="{{route('profile.show',$user->id)}}" class="text-decoration-none fw-bold text-dark">
+                                {{$user->name}}
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <form action="{{route('follow.store')}}" method="post">
+                            @csrf
+                                <input type="hidden" name="user_id" value="{{$user->id}}">
+                                <button class="btn text-primary btn-sm">Follow</button>
+                        </form>
+                        </div>
+
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>
 @endsection
+asdasd
