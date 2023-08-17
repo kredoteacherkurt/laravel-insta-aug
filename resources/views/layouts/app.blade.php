@@ -10,8 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }} | @yield('title') </title>
 
     <!-- Fonts -->
-    
-    
+
+
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -79,6 +79,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('admin.users')}}" class="dropdown-item">
+
+                                        <i class="fa-solid fa-user-gear"></i> Admin
+                                    </a>
+                                    <hr>
                                     <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
                                         {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
                                         <i class="fa-solid fa-circle-user"></i> Profile
@@ -103,9 +108,16 @@
 
         <main class="py-5">
            <div class="row justify-content-center">
-                {{-- <div class="col-3"> --}}
-                    {{-- admin controls :3rd week --}}
-                {{-- </div> --}}
+            {{-- create a condition where this navigation side bar is only display in admin page --}}
+                @if (request()->is('admin/*'))
+                <div class="col-3">
+                    <div class="list-group">
+                        <a href="{{route('admin.users')}}" class="list-group-item"> <i class="fa-solid fa-users"></i> Users</a>
+                        <a href="" class="list-group-item"> <i class="fa-solid fa-newspaper"></i> Posts</a>
+                        <a href="" class="list-group-item"> <i class="fa-solid fa-tags"></i> Categories</a>
+                    </div>
+                </div>
+                @endif
 
                 <div class="col-7">
                     @yield('content')
