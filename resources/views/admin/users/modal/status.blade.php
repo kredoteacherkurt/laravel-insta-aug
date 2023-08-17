@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <form action="" method="post">
+                <form action="{{route('admin.users.deactivate',$user->id)}}" method="post">
                     @csrf
                     @method('DELETE')
 
@@ -23,3 +23,4 @@
         </div>
     </div>
 </div>
+{{-- hard delete, soft delete --}}

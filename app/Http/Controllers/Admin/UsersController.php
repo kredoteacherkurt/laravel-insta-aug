@@ -11,8 +11,14 @@ class UsersController extends Controller
     //
 
     public function index(){
-        $all_users = User::all();
+        $all_users = User::withTrashed()->latest()->get();
 
         return view('admin.users.index')->with('all_users', $all_users);
+    }
+
+    public function deactivate($id){
+        User::findOrFail($id)->delete();
+
+        return redirect()->back();
     }
 }

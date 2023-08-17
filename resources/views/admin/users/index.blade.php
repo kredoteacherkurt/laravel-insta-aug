@@ -26,7 +26,11 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>
-                        <i class="fa-solid fa-circle text-success"></i>
+                        @if ($user->trashed())
+                            <i class="fa-solid fa-circle text-danger" title="deactivated"></i>
+                        @else
+                            <i class="fa-solid fa-circle text-success" title="active"></i>
+                        @endif
                     </td>
                     <td>
                         <div class="dropdown">
@@ -35,9 +39,17 @@
                             </button>
 
                             <div class="dropdown-menu">
-                                <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deactivate-user-{{$user->id}}">
-                                    <i class="fa-solid fa-user-slash">Deactivate user {{$user->name}}</i>
-                                </button>
+                                @if ($user->trashed())
+                                    <button class="dropdown-item text-success" data-bs-toggle="modal"
+                                        data-bs-target="#activate-user-{{ $user->id }}">
+                                        <i class="fa-solid fa-user-check">Activate user {{ $user->name }}</i>
+                                    </button>
+                                @else
+                                    <button class="dropdown-item text-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deactivate-user-{{ $user->id }}">
+                                        <i class="fa-solid fa-user-slash">Deactivate user {{ $user->name }}</i>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </td>
