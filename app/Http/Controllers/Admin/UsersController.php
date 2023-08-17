@@ -21,4 +21,10 @@ class UsersController extends Controller
 
         return redirect()->back();
     }
+
+    public function activate($id){
+        User::withTrashed()->findOrFail($id)->restore();
+
+        return redirect()->back();
+    }
 }
