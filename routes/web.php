@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -55,5 +56,7 @@ Route::group(["middleware" => "auth"], function () {
         Route::get('/users',[UsersController::class,'index'])->name('users');
         Route::delete('/users/{id}',[UsersController::class,'deactivate'])->name('users.deactivate');
         Route::patch('/users/activate/{id}',[UsersController::class,'activate'])->name('users.activate');
+
+        Route::get('/posts',[PostsController::class,'index'])->name('posts');
     });
 });
