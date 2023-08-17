@@ -13,7 +13,7 @@
             <th></th>
         </thead>
         <tbody>
-            @foreach ($all_users as $user)
+            @foreach ($all_users->except(Auth::user()->id) as $user)
                 <tr>
                     <td>
                         @if ($user->avatar)
@@ -30,12 +30,18 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <button class="btn btn-sm">
+                            <button class="btn btn-sm" data-bs-toggle="dropdown">
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
+
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deactivate-user-{{$user->id}}">
+                                    <i class="fa-solid fa-user-slash">Deactivate user {{$user->name}}</i>
+                                </button>
+                            </div>
                         </div>
                     </td>
-
+                    @include('admin.users.modal.status')
                 </tr>
             @endforeach
         </tbody>
