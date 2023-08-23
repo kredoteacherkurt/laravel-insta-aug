@@ -36,6 +36,7 @@
                 </div>
 
                 @foreach($suggested_users as $user)
+                Sample
                     <div class="row align-items-center mb-3">
                         <div class="col-auto">
                                 @if($user->avatar)
