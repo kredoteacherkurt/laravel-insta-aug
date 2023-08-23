@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
 
     /**
@@ -28,22 +28,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $all_posts = Post::latest()->get();
+        $all_posts = $this->getHomePosts();
         $suggested_users = $this->getSuggestedUsers();
         // $all_categories = Category::latest()->get();
         // return view('users.home')->with('all_posts', $all_posts);
 
         $home_posts = $this->getHomePosts();
         return view('users.home')
-                    ->with('home_posts', $all_posts)
-                    ->with('suggested_users', $suggested_users);
+                   ->with('home_posts', $all_posts)
+                   ->with('suggested_users', $suggested_users);
     }
 
-    # GET THE POSTS of the users that the logged-in user is following
-    private function getHomePosts()
-    {
-        $all_posts = Post::latest()->get();
-        $home_posts = []; //if you dont declare the $home_posts as an empty array, it will return NULL.
+    # GET THE POSTS of the users that the logged-in user id following
+    private function getHomePosts(){
+        $all_posts = Post::all();
+        $home_posts = [];  //if you don't declare the $home_posts as an empty array, it will return NULL.
 
         foreach($all_posts as $post){
             if($post->user->isFollowed() || $post->user->id === Auth::user()->id){
@@ -53,19 +52,19 @@ class HomeController extends Controller
 
         return $home_posts;
     }
-    public function getSuggestedUsers(){
-        //1. create a new method inside home contnroller
-        //2. pass the data to home.blade.php
-        // gets the users you dont follow
 
+    public function getSuggestedUsers(){
         $all_users = User::all()->except(Auth::user()->id);
         $suggested_users = [];
         foreach($all_users as $user):
-            if (!$user->isFollowed()) {
+            if(!$user->isFollowed()){
                 $suggested_users [] = $user;
             }
         endforeach;
 
         return $suggested_users;
+
     }
+
+
 }

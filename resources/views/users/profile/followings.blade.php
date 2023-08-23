@@ -1,43 +1,36 @@
 @extends('layouts.app')
 
-@section('title', 'Follower')
+@section('title', 'Following')
 
 @section('content')
     @include('users.profile.header')
 
     <div style="margin-top: 100px;">
-        @if($user->followers->isNotEmpty())
+        @if($user->following->isNotEmpty())
             <div class="row justify-content-center">
                 <div class="col-4 text-muted">
                     <p class="text-center">
-                        Followers
+                        Followings
                     </p>
-                    
-                    @foreach ($user->followers as $follower)
+
+                    @foreach($user->following as $following)
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <a href="{{ route('profile.show', $follower->follower->id) }}">
-                                    @if($follower->follower->avatar)
-                                        <img src="{{ $follower->follower->avatar }}" alt="" class="rounded-circle avatar-sm">
+                                <a href="{{ route('profile.show', $following->following->id) }}">
+                                    @if($following->following->avatar)
+                                        <img src="{{ $following->following->avatar }}" alt="" class="rounded-circle avatar-sm">
                                     @else
                                         <i class="fa-solid fa-circle-user icon-sm text-secondary"></i>
-                                    @endif
+                                    @endif  
                                 </a>
                             </div>
-                            <div class="col ps-0 text-truncate">
-                                <a href="{{ route('profile.show', $follower->follower->id) }}" class="text-dark text-decoration-none">{{ $follower->follower->name }}</a>
+
+                            <div class="col ps-9 text-truncate">
+                                <a href="{{ route('profile.show', $following->following->id) }}" class="text-dark text-decoration-none">{{ $following->following->name }}</a>
                             </div>
                             <div class="col-auto text-end">
-                                @if ($follower->follower->isFollowed())
-                                    {{-- @if(id == Auth::user()->id)
-
-                                    @else
-
-                                    @endif --}}
-
-
-
-                                    <form action="{{ route('follow.destroy', $follower->follower->id) }}" method="post">
+                                @if ($following->following->isFollowed())
+                                    <form action="{{ route('follow.destroy', $following->following->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                             <button type="submit" class="btn text-danger btn-sm">Following</button>
@@ -45,8 +38,9 @@
                                 @else
                                     <form action="{{ route('follow.store') }}" method="post">
                                         @csrf
-                                            <input type="hidden" name="user_id" value="{{ $follower->follower->id }}">
-                                            <button type="submit" class="btn text-danger btn-sm">Follow</button>
+                                        @method('DELETE')
+                                        <input type="hidden" name="user_id" value="{{ $following->following->id }}">
+                                        <button type="submit" class="btn text-danger btn-sm">Following</button>
                                     </form>
                                 @endif
                             </div>
@@ -55,5 +49,6 @@
                 </div>
             </div>
         @endif
-    </div> 
+    </div>
+
 @endsection

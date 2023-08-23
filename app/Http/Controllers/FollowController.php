@@ -8,13 +8,12 @@ use App\Models\Follow;
 
 class FollowController extends Controller
 {
+
     private $follow;
 
-    public function __construct(Follow $follow)
-    {
+    public function __construct(Follow $follow){
         $this->follow = $follow;
     }
-
     /**
      * Display a listing of the resource.
      */
@@ -39,15 +38,17 @@ class FollowController extends Controller
         $this->follow->follower_id = Auth::user()->id;
         $this->follow->following_id = $request->user_id;
         $this->follow->save();
+
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // $follow =  $this->follow->follower_id->findOrFail(Auth::user()->id);
+        // return view('users.profile.followers')->with('follow', $follow);
     }
 
     /**
@@ -71,11 +72,10 @@ class FollowController extends Controller
      */
     public function destroy($user_id)
     {
-        $this->follow
-                ->where('follower_id', Auth::user()->id)
-                ->where('following_id', $user_id)
-                ->delete();
-
+        $this->follow->where('follower_id', Auth::user()->id)
+                     ->where('following_id', $user_id)
+                     ->delete();
+        
         return redirect()->back();
     }
 }

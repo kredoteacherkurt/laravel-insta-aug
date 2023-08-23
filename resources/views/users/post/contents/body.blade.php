@@ -30,11 +30,16 @@
             <strong>{{ $post->likes->count() }}</strong>
         </div>
         <div class="col text-end">
-            @foreach ($post->categoryPost as $category_post)
+            @forelse ($post->categoryPost as $category_post)
                 <span class="badge bg-primary bg-opacity-50">
                     {{ $category_post->category->name }}
                 </span>
-            @endforeach
+            @empty
+                <span class="badge bg-primary bg-opacity-50">
+                    Uncategorized
+                </span>
+            
+            @endforelse
         </div>
     </div>
 

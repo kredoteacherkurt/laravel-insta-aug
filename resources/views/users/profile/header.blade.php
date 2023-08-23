@@ -11,41 +11,43 @@
             <div class="col-auto">
                 <h2 class="display-6">{{ $user->name }}</h2>
             </div>
-
+        
             <div class="col-auto p-2">
                 @if ($user->id == Auth::user()->id)
                     <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-outline-secondary btn-sm fw-bold">Edit Profile</a>
                 @else
-                    @if($user->isFollowed())
-                        <form action="{{ route('follow.destroy', $user->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-secondary btn-sm fw-bold">Following</button>
-                        </form>
+                    @if ($user->isFollowed())
+                    <form action="{{ route('follow.destroy', $user->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary btn-sm fw-bold">Following</button>
+                    </form>
+
                     @else
-                        <form action="{{ route('follow.store') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{ $user->id }}">
-                            <button type="submit" class="btn btn-primary btn-sm fw-bold">Follow</button>
-                        </form>
+                    <form action="{{ route('follow.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <button type="submit" class="btn btn-primary btn-sm fw-bold">Follow</button>
+                    </form>
                     @endif
                 @endif
             </div>
         </div>
         <div class="row">
             <div class="col-auto">
-                <strong class="fw-bold">{{ $user->posts->count() }}</strong> {{ $user->posts->count() == 1 ? 'Post' : 'Posts' }}
-                {{-- Ternary Operator ~~ condition ? true : false --}}
-            </div>
-            <div class="col-auto">
-                <strong class="fw-bold">{{ $user->followers->count() }}</strong>
-                 <a href="{{route('follower.show',$user->id)}}" class="text-dark text-decoration-none">
-                    {{ $user->followers->count() == 1 ? 'Follower' : 'Followers' }}
+                <a href="{{ route('profile.show', Auth::user()->id) }}" class="text-decoration-none text-dark">
+                    <strong class="fw-bold">{{ $user->posts->count() }}</strong> {{ $user->posts->count() == 1 ? 'Post' : 'Posts' }}
+                    {{-- Ternary Operator ~~ condition ? true : false --}}
                 </a>
             </div>
             <div class="col-auto">
-                <strong class="fw-bold">{{ $user->following->count() }}</strong> <a href="{{route('following.show',$user->id)}}" class="text-decoration-none text-dark">
-                Following
+                <a href="{{ route('follower.show', $user->id) }}" class="text-decoration-none text-dark">
+                    <strong class="fw-bold">{{ $user->followers->count() }}</strong> {{ $user->followers->count() == 1 ? 'Follower' : 'Followers' }}
+            </a>
+            </div>
+            <div class="col-auto">
+                <a href="{{ route('following.show', $user->id) }}" class="text-decoration-none text-dark">
+                    <strong class="fw-bold">{{ $user->following->count() }}</strong> {{ $user->following->count() == 1 ? 'Following' : 'Followings' }}
             </a>
             </div>
         </div>

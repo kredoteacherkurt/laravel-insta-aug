@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    # To get the number of categories for each post  ~~ to get the posts inside a category
+    public function categoryPost(){
+        return $this->hasMany(CategoryPost::class);
+    }
 }

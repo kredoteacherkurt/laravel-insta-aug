@@ -11,3 +11,15 @@
     width: 2rem;
     object-fit: cover;
 }
+
+.image-sm{
+    height: 7rem;
+    width: 7rem;
+    object-fit: cover;
+}
+
+.image-lg{
+    height: 9rem;
+    width: 9rem;
+    object-fit: cover;
+}

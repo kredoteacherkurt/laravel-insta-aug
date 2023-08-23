@@ -12,14 +12,12 @@ class Follow extends Model
     public $timestamps = false;
 
     # Follower is a user ~~ to get the info/data of a follower
-    public function follower()
-    {
+    public function follower(){
         return $this->belongsTo(User::class, 'follower_id');
     }
-
-    # To get the info/data of the user being followed
-    public function following()
-    {
+    
+    #To get the info/data of the user being followed
+    public function following(){
         return $this->belongsTo(User::class, 'following_id');
     }
 }

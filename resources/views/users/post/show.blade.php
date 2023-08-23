@@ -22,19 +22,21 @@
                         <div class="col ps-0">
                             <a href="#" class="text-decoration-none text-dark">{{ $post->user->name }}</a>
                             {{-- IF YOU ARE NOT THE OWNER OF THE POST, SHOW FOLLOW AND UNFOLLOW BUTTON --}}
-                            @if($post->user->isFollowed())
+
+                            @if ($post->user->isFollowed())
                                 <form action="{{ route('follow.destroy', $post->user->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-secondary btn-sm fw-bold">Following</button>
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="btn btn-primary btn-sm fw-bold">Following</button>
                                 </form>
                             @else
                                 <form action="{{ route('follow.store') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="user_id" value="{{ $post->user->id }}">
-                                    <button type="submit" class="btn btn-primary btn-sm fw-bold">Follow</button>
+                                @csrf
+                                   <input type="hidden" name="user_id" value="{{ $post->user->id }}">
+                                   <button type="submit" class="btn btn-primary btn-sm fw-bold">Follow</button>
                                 </form>
                             @endif
+                        
                         </div>
                         <div class="col-auto">
                             <div class="dropdown">
@@ -52,7 +54,7 @@
                                         </button>
                                     </div>
                                 @else
-                                    
+                                
                                 @endif
 
                             </div>

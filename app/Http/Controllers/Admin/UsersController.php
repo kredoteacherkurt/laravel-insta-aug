@@ -9,7 +9,7 @@ use App\Models\User;
 class UsersController extends Controller
 {
     //
-
+    
     public function index(){
         $all_users = User::withTrashed()->latest()->get();
 
@@ -27,4 +27,5 @@ class UsersController extends Controller
 
         return redirect()->back();
     }
+
 }

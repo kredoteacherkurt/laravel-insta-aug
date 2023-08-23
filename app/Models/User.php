@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -49,23 +49,21 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    # User has many Followers ~~ to get all the followers of a user
-    public function followers()
-    {
+    # User has many followers ~~ to get all the followers of a user
+
+    public function followers(){
         return $this->hasMany(Follow::class, 'following_id');
     }
 
     # User can follow many users ~~ to get all the people that the user is following
-    public function following()
-    {
+    public function following(){
         return $this->hasMany(Follow::class, 'follower_id');
     }
 
-    public function isFollowed()
-    {
+    public function isFollowed(){
         return $this->followers()->where('follower_id', Auth::user()->id)->exists();
-        // Auth::user()->id is the follower_id ~~ if you are following the user
-        // 1. It gets all the followers of the user ($this->followers()).
+        //Auth::user()->id is the follower_id ~~ if you are following the user
+        // 1. It gets all the followers of the user ($This->followers()).
         // 2. From that list, it will search the logged-in user (Auth user) from the follower_id column (where('follower_id', Auth::user()->id))
     }
 }

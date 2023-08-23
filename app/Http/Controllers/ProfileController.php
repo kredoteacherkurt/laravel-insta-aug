@@ -78,7 +78,7 @@ class ProfileController extends Controller
         if($request->avatar){
             $user->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
             }
-
+        
         $user->save();
 
         return redirect()->route('profile.show', $id);
@@ -91,14 +91,16 @@ class ProfileController extends Controller
     {
         //
     }
+
     public function followers($id){
-       $user =  $this->user->findOrFail($id);
+        $user = $this->user->findOrFail($id);
 
-       return view('users.profile.followers')->with('user',$user);
+        return view('users.profile.followers')->with('user', $user);
     }
-    public function following($id){
-        $user =  $this->user->findOrFail($id);
 
-        return view('users.profile.following')->with('user',$user);
+    public function following($id){
+        $user = $this->user->findOrFail($id);
+
+        return view('users.profile.followings')->with('user', $user);
     }
 }
