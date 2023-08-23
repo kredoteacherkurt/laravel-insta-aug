@@ -8,7 +8,7 @@
                 <div class="card mb-4">
                     @include('users.post.contents.title')
                     @include('users.post.contents.body')
-                </div>         
+                </div>
             @empty
             <div class="text-center">
                 <h2>Share Photes</h2>
@@ -22,7 +22,7 @@
             Profile overview
 
             {{-- suggested users --}}
-           
+
             <div>
                 <div class="row">
                     <div class="col-auto">
@@ -36,14 +36,14 @@
                 </div>
 
                 @foreach($suggested_users as $user)
-                Sample
+               
                     <div class="row align-items-center mb-3">
                         <div class="col-auto">
                                 @if($user->avatar)
                                     <img src="{{ $user->avatar }}" alt="" class="rounded-circle avatar-sm">
                                 @else
                                     <i class="fa-solid fa-circle-user icon-sm text-secondary"></i>
-                                @endif  
+                                @endif
                         </div>
                         <div class="col ps-0 text-truncate">
                             <a href="{{ route('profile.show', $user->id) }}" class="text-dark text-decoration-none fw-bold">{{ $user->name }}</a>
