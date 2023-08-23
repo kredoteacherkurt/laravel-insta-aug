@@ -119,6 +119,7 @@
             @endif
 
                 <div class="col-7">
+                    sample
                     @yield('content')
                 </div>
            </div>
