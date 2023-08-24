@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container">
+        
         <form action="{{ route('admin.categories.store') }}" method="post">
             @csrf
             <div class="row mb-3">
@@ -13,10 +14,13 @@
                 <div class="col">
                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD</button>
                 </div>
-                
-                
-            </div>
-        </form>
+            </form>
+            <form action="" method="get">
+                <div class="col">
+                    <input type="search" class="form-control w-25 float-end" name="searchCategory" id="search-category" placeholder="Search" value="{{ request('searchCategory') }}">
+                </div>
+            </form>   
+        </div>  
         
     </div>
 

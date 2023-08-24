@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $all_categories = Category::latest()->get();
 
@@ -35,9 +35,18 @@ class CategoriesController extends Controller
             }
         endforeach;
 
+        $searchCategory = $request->input('searchCategory');
+
+        $query = Category::query();
+
+        if(!empty($searchCategory)){
+            $query->where('name', 'LIKE', "%{$searchCategory}%");
+        }
+        $categories = $query->get();
        
         return view('admin.categories.index')->with('all_categories', $all_categories)
-        ->with('uncategorized',$uncategorized);
+        ->with('uncategorized',$uncategorized)
+        ->with('searchCategory', $searchCategory);
     }
 
     /**
@@ -92,13 +101,5 @@ class CategoriesController extends Controller
         $category = $this->category->findOrFail($id)->delete();
 
         return redirect()->back();
-
-        
     }
-
-    // public function uncategorized(){
-    //     $uncategorized = Categories::whereNull('category_id')->count();
-
-    //     return redirect()->back();
-    // }
 }

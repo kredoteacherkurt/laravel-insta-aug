@@ -26,7 +26,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $all_posts = $this->getHomePosts();
         $suggested_users = $this->getSuggestedUsers();
@@ -34,9 +34,22 @@ class HomeController extends Controller
         // return view('users.home')->with('all_posts', $all_posts);
 
         $home_posts = $this->getHomePosts();
+        
+        $searchUser = $request->input('searchUser');
+
+        $query = User::query();
+
+        if(!empty($searchUser)){
+            $query->where('name', 'LIKE', "%{$searchUser}%");
+        }
+
+        $users = $query->get();
+        
+
         return view('users.home')
                    ->with('home_posts', $all_posts)
-                   ->with('suggested_users', $suggested_users);
+                   ->with('suggested_users', $suggested_users)
+                   ->with('searchUser', $searchUser);
     }
 
     # GET THE POSTS of the users that the logged-in user id following

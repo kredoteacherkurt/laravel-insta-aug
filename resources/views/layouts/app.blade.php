@@ -38,6 +38,10 @@
                     <!-- Left Side Of Navbar -->
                     {{-- future activity, last week: serch bar - students activity --}}
                     <ul class="navbar-nav me-auto">
+                        <form action="" method="get">
+                            @csrf
+                            <input type="search" class="form-control w-100" name="searchUser" id="search-user" placeholder="Search...">
+                        </form>   
 
                     </ul>
 
@@ -119,7 +123,7 @@
             @endif
 
                 <div class="col-7">
-                    sample
+            
                     @yield('content')
                 </div>
            </div>

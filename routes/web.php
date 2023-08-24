@@ -10,6 +10,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Models\User;
 
 
 /*
@@ -34,6 +35,16 @@ Auth::routes();
 Route::group(["middleware" => "auth"], function(){
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
+
+   //  Route::get('/', function(){
+   //    if(request('searchUser')){
+   //       $users = User::where('name', 'like', '%' . request('searchUser') . '%')->get();
+   //    } else{
+   //       $users = User::all();
+   //    }
+
+   //    return view('users.home')->with('users', $users);
+   // });
 
 //    Route::get('/post/create',[PostController::class,'create'])->name('post.create');
 //    Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
@@ -67,7 +78,16 @@ Route::group(["middleware" => "auth"], function(){
       Route::delete('/categories/{id}/destroy', [CategoriesController::class, 'destroy'])->name('categories.destroy');
       Route::get('/categories/{id}/index', [CategoriesContoller::class, 'uncategorized'])->name('categories.uncategorized');
       Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
+
+      // Route::get('/', function(){
+      //    if(request('searchCategory')){
+      //       $categories = Category::where('name', 'like', '%' . request('searchCategory') . '%')->get();
+      //    } else{
+      //       $categories = Category::all();
+      //    }
+
+      //    return view('admin.categories.index')->with('categories', $categories);
+      // });
    });
 
-   
 });
