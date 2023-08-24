@@ -28,4 +28,23 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    // UserController.php
+
+// UsersController.php
+
+public function search(Request $request)
+{
+    $search = $request->input('search');
+    
+    $all_users = User::withTrashed()
+        ->where('name', 'LIKE', "%$search%")
+        ->orWhere('email', 'LIKE', "%$search%")
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('admin.users.index', compact('all_users'));
+}
+
+
+
 }
