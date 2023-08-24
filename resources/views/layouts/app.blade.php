@@ -38,9 +38,9 @@
                     <!-- Left Side Of Navbar -->
                     {{-- future activity, last week: serch bar - students activity --}}
                     <ul class="navbar-nav me-auto">
-                        <form action="" method="get">
+                        <form action="{{ route('search') }}" method="get">
                             @csrf
-                            <input type="search" class="form-control w-100" name="searchUser" id="search-user" placeholder="Search...">
+                            <input type="search" class="form-control w-100" name="search" placeholder="Search...">
                         </form>   
 
                     </ul>

@@ -35,16 +35,7 @@ Auth::routes();
 Route::group(["middleware" => "auth"], function(){
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
-
-   //  Route::get('/', function(){
-   //    if(request('searchUser')){
-   //       $users = User::where('name', 'like', '%' . request('searchUser') . '%')->get();
-   //    } else{
-   //       $users = User::all();
-   //    }
-
-   //    return view('users.home')->with('users', $users);
-   // });
+    Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 //    Route::get('/post/create',[PostController::class,'create'])->name('post.create');
 //    Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
@@ -67,10 +58,12 @@ Route::group(["middleware" => "auth"], function(){
       Route::get('/users', [UsersController::class, 'index'])->name('users');
       Route::delete('/users/{id}', [UsersController::class, 'deactivate'])->name('users.deactivate');
       Route::patch('/users/activate/{id}', [UsersController::class, 'activate'])->name('users.activate');
+      Route::get('/users/search', [UsersController::class, 'search'])->name('users.search');
 
       Route::get('/posts', [PostsController::class, 'index'])->name('posts');
       Route::delete('/posts/{id}/hide', [PostsController::class, 'hide'])->name('posts.hide');
       Route::patch('/posts/{id}/unhide', [PostsController::class, 'unhide'])->name('posts.unhide');
+      Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 
       Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
       Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
@@ -78,16 +71,7 @@ Route::group(["middleware" => "auth"], function(){
       Route::delete('/categories/{id}/destroy', [CategoriesController::class, 'destroy'])->name('categories.destroy');
       Route::get('/categories/{id}/index', [CategoriesContoller::class, 'uncategorized'])->name('categories.uncategorized');
       Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
-
-      // Route::get('/', function(){
-      //    if(request('searchCategory')){
-      //       $categories = Category::where('name', 'like', '%' . request('searchCategory') . '%')->get();
-      //    } else{
-      //       $categories = Category::all();
-      //    }
-
-      //    return view('admin.categories.index')->with('categories', $categories);
-      // });
+      Route::get('/categories/search', [CategoriesController::class, 'search'])->name('categories.search');
    });
 
 });

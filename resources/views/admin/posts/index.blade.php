@@ -3,6 +3,12 @@
 @section('title', 'Admin Posts')
 
 @section('content')
+<div class="container">
+    <form action="{{ route('admin.posts.search') }}" method="get">
+        @csrf
+        <input type="text" class="form-control w-25 float-end mb-4" name="search" id="search" placeholder="Search">
+    </form>  
+
     <table class="table table-hover bg-white align-middle border text-secondary">
         <thead class="small table-primary text-secondary">
             <th></th>
@@ -73,4 +79,5 @@
     </table> 
     {{ $all_posts->links() }}
        
+</div>
 @endsection

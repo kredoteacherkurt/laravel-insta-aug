@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <form action="" method="post">
+        <form action="{{ route('admin.users.search') }}" method="get">
             @csrf
             <input type="text" class="form-control w-25 float-end mb-4" name="search" id="search" placeholder="Search">
         </form>   

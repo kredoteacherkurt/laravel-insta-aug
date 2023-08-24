@@ -15,9 +15,9 @@
                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD</button>
                 </div>
             </form>
-            <form action="" method="get">
+            <form action="{{ route('admin.categories.search') }}" method="get">
                 <div class="col">
-                    <input type="search" class="form-control w-25 float-end" name="searchCategory" id="search-category" placeholder="Search" value="{{ request('searchCategory') }}">
+                    <input type="search" class="form-control w-25 float-end" name="search" id="search" placeholder="Search">
                 </div>
             </form>   
         </div>  

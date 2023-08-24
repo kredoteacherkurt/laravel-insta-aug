@@ -26,7 +26,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
         $all_posts = $this->getHomePosts();
         $suggested_users = $this->getSuggestedUsers();
@@ -34,22 +34,10 @@ class HomeController extends Controller
         // return view('users.home')->with('all_posts', $all_posts);
 
         $home_posts = $this->getHomePosts();
-        
-        $searchUser = $request->input('searchUser');
-
-        $query = User::query();
-
-        if(!empty($searchUser)){
-            $query->where('name', 'LIKE', "%{$searchUser}%");
-        }
-
-        $users = $query->get();
-        
 
         return view('users.home')
                    ->with('home_posts', $all_posts)
-                   ->with('suggested_users', $suggested_users)
-                   ->with('searchUser', $searchUser);
+                   ->with('suggested_users', $suggested_users);
     }
 
     # GET THE POSTS of the users that the logged-in user id following
@@ -77,6 +65,17 @@ class HomeController extends Controller
 
         return $suggested_users;
 
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+
+        $all_users = User::withTrashed()
+            ->where('name', 'LIKE', "%$search%")
+            ->orWhere('email', 'LIKE', "%$search%")
+            ->orderBy('created_at', 'desc')->get();
+
+        return view('users.home', compact('all_users'));
     }
 
 

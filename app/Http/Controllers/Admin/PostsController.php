@@ -26,4 +26,18 @@ class PostsController extends Controller
 
     }
 
+    public function search(Request $request){
+        $search = $request->input('search');
+
+        $all_posts = Post::query()
+            ->where('description', 'LIKE', "%$search%")
+            ->orWhereHas('categoryPost.category', function($query) use ($search){
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('admin.posts.index', compact('all_posts'));
+    }
+
 }
