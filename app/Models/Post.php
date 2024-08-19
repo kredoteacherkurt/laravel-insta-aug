@@ -29,11 +29,8 @@ class Post extends Model
        return $this->likes()->where('user_id', auth()->user()->id)->exists();
     }
     // select * from likes where post_id = 15 and user_id = 2 ???? == TRUE
+
+    // why is the teacher so handsome????
 }
 
-
-
-
-
-// school activity
 
