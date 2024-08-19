@@ -3,7 +3,7 @@
 @section('title', 'Create post')
 
 @section('content')
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="categories" class="form-label fw-bold d-block">
@@ -32,7 +32,5 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary px-5">Post</button>
-
-
     </form>
 @endsection
