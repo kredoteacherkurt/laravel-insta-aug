@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 
 
@@ -31,6 +32,11 @@ Route::group(["middleware" => "auth"], function () {
         Route::get('/edit/{user_id}',[ProfileController::class,'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class,'update'])->name('update');
 
+    });
+
+    Route::group(['prefix'=>'like'], function(){
+        Route::post('store/{post_id}', [LikeController::class, 'store'])->name('like');
+        // Route::delete('destroy/{post_id}', [CommentController::class, 'destroy'])->name('unlike');
     });
 
 
