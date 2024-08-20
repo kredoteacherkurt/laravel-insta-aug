@@ -2,8 +2,8 @@
     <div class="row align-items-center">
         <div class="col-auto">
             <a href="">
-                @if($post->user->avatar)
-                    <img src="{{$post->user->avatar}}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm">
+                @if ($post->user->avatar)
+                    <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}" class="rounded-circle avatar-sm">
                 @else
                     <i class="fa-solid fa-circle-user text-secondary icon-sm"></i>
                 @endif
@@ -21,12 +21,13 @@
                 </button>
 
                 {{-- IF you are the owner of the POST, you can EDIT and DELETE this post --}}
-                @if(Auth::user()->id === $post->user->id)
+                @if (Auth::user()->id === $post->user->id)
                     <div class="dropdown-menu">
                         <a href="{{ route('post.edit', $post->id) }}" class="dropdown-item">
                             <i class="fa-regular fa-pen-to-square"></i> Edit
                         </a>
-                        <button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{ $post->id }}">
+                        <button class="dropdown-item text-danger" data-bs-toggle="modal"
+                            data-bs-target="#delete-post-{{ $post->id }}">
                             <i class="fa-regular fa-trash-can"></i> Delete
                         </button>
                     </div>
@@ -35,12 +36,22 @@
                 @else
                     {{-- IF you are NOT the owner of the POST, show the UNFOLLOW button. [DISCUSSED LATER] --}}
                     <div class="dropdown-menu">
-                        <form action="" method="post">
-                            @csrf
-                            @method('DELETE')
+                        @if ($post->user->isFollowed())
+                            <form action="{{ route('follow.destroy', $post->user->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
 
-                            <button type="submit" class="dropdown-item text-danger">Unfollow</button>
-                        </form>
+
+                                <button type="submit" class="dropdown-item text-danger">Unfollow</button>
+                            </form>
+                        @else
+                            <form action="{{ route('follow.store', $post->user->id) }}" method="post">
+                                @csrf
+
+
+                                <button type="submit" class="dropdown-item text-primary">Follow</button>
+                            </form>
+                        @endif
                     </div>
                 @endif
             </div>

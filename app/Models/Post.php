@@ -30,7 +30,7 @@ class Post extends Model
     }
     // select * from likes where post_id = 15 and user_id = 2 ???? == TRUE
 
-    // why is the teacher so handsome????
+   
 }
 
 
