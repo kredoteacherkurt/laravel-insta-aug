@@ -23,7 +23,7 @@
                             </a>
                         </div>
                         <div class="col ps-0 text-truncate">
-                            <a href="#" class="text-decoration-none text-dark fw-bold">
+                            <a href="{{route('profile.show',$follower->follower->id)}}" class="text-decoration-none text-dark fw-bold">
                                 {{ $follower->follower->name }}
                             </a>
                         </div>

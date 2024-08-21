@@ -11,7 +11,7 @@
         </div>
 
         <div class="col ps-0">
-            <a href="" class="text-decoration-none text-dark">{{ $post->user->name }}</a>
+            <a href="{{route('profile.show',$post->user->id)}}" class="text-decoration-none text-dark">{{ $post->user->name }}</a>
         </div>
 
         <div class="col-auto">
