@@ -34,7 +34,7 @@
             </div>
 
             <div class="col-auto">
-                <a href="" class="text-decoration-none text-dark">
+                <a href="{{route('profile.followers',$user->id)}}" class="text-decoration-none text-dark">
                     <strong>0</strong> followers
                 </a>
             </div>

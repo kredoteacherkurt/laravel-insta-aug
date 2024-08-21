@@ -41,4 +41,16 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show', $user->id);
     }
+
+    public function followers($id){
+        $user = $this->user->findOrFail($id);
+
+        return view('users.profile.follower')->with('user', $user);
+    }
+
+    public function following($id){
+        $user = $this->user->findOrFail($id);
+
+        return view('users.profile.following')->with('user', $user);
+    }
 }

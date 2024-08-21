@@ -32,4 +32,6 @@ class FollowController extends Controller
 
         return back();
     }
+
+    
 }
