@@ -30,7 +30,7 @@
                         <div class="col-auto text-end">
                             @if ($following->following->id != Auth::user()->id)
                                 @if ($following->following->isFollowed())
-                                    <form action="{{route('follow.destroy',$following->following->id)}}" method="post">
+                                    <form action="{{route('follow.destroy',$following->following->id)'}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm text-secondary border-0">
