@@ -54,6 +54,7 @@ class HomeController extends Controller
 
     public function getHomePosts()
     {
+
         $all_posts = $this->post->latest()->get();
         $home_posts = [];
         foreach ($all_posts as $post) {
@@ -65,3 +66,4 @@ class HomeController extends Controller
         return $home_posts;
     }
 }
+
