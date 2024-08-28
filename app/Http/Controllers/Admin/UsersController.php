@@ -15,7 +15,21 @@ class UsersController extends Controller
     }
 
     public function index(){
-        $all_users = $this->user->all();
+        $all_users = $this->user->withTrashed()->get();
         return view('admin.users.index')->with('all_users',$all_users);
+    }
+
+    public function deactivate($id){
+        $user = $this->user->findOrFail($id);
+        $user->delete();
+        return back();
+    }
+
+    public function activate($id){
+        // get all data including deleted data and find this ID;
+        $user = $this->user->withTrashed()->findOrFail($id);
+        // put it back, remove the deleted_at column
+        $user->restore();
+        return back();
     }
 }

@@ -29,8 +29,12 @@
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
-                    <td>
-                        <i class="fa-solid fa-circle text-success"></i>
+                    <td class="text-center">
+                        @if ($user->trashed())
+                            <i class="fa-solid fa-circle text-danger "></i>
+                        @else
+                            <i class="fa-solid fa-circle text-success"></i>
+                        @endif
                     </td>
                     <td>
                         @if (Auth::user()->id != $user->id)
@@ -39,11 +43,18 @@
                             </button>
 
                             <div class="dropdown-menu">
-                                <button type="button" class=" btn dropown-item text-danger" data-bs-toggle="modal" data-bs-target="#deactivate-user-{{$user->id}}">
-                                     <i class="fa-solid fa-user-slash"></i> Deactivate {{$user->name}}
-                                </button>
+                                @if ($user->trashed())
+                                    <button type="button" class=" btn dropown-item text-success" data-bs-toggle="modal"
+                                        data-bs-target="#activate-user-{{ $user->id }}">
+                                        <i class="fa-solid fa-user-check"></i> Activate {{ $user->name }}
+                                    </button>
+                                @else
+                                    <button type="button" class=" btn dropown-item text-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deactivate-user-{{ $user->id }}">
+                                        <i class="fa-solid fa-user-slash"></i> Deactivate {{ $user->name }}
+                                    </button>
+                                @endif
                             </div>
-
                         @endif
                         @include('admin.users.modal.status')
                     </td>
