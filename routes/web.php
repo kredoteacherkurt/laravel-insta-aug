@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -21,8 +22,7 @@ Route::group(["middleware" => "auth"], function () {
         Route::get('show/{id}', [PostController::class, 'show'])->name('show');
         Route::get('edit/{id}', [PostController::class, 'edit'])->name('edit');
         Route::patch('update/{id}', [PostController::class, 'update'])->name('update');
-        Route::delete('destroy/{id}', [PostController::class, 'destroy'])->name('destroy');
-    });
+        Route::delete('destroy/{id}', [PostController::class, 'destroy'])->name('destroy');    });
 
     Route::group(['prefix'=>'comment', 'as'=>'comment.'], function(){
         Route::post('store/{post_id}', [CommentController::class, 'store'])->name('store');
@@ -44,6 +44,15 @@ Route::group(["middleware" => "auth"], function () {
     Route::group(['prefix'=>'follow',"as"=>"follow."], function(){
         Route::post('follow/{following_id}', [FollowController::class, 'store'])->name('store');
         Route::delete('follow/{following_id}', [FollowController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group(["prefix"=>"admin","as"=>"admin."],function(){
+        Route::group(["prefix"=>"users","as"=>"users."], function(){
+            Route::get('/index',[UsersController::class,'index'])->name('index');
+        });
+
+
+
     });
 
 

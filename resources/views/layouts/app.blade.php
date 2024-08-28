@@ -65,7 +65,7 @@
                             </li>
                             {{-- create button --}}
                             <li class="nav-item">
-                                <a href="{{route('post.create')}}" class="nav-link">
+                                <a href="{{ route('post.create') }}" class="nav-link">
                                     <i class="fa-solid fa-circle-plus text-dark icon-sm"></i>
                                 </a>
                             </li>
@@ -74,14 +74,21 @@
                                 <a id="navbarDropdown" class="nav-link " href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (Auth::user()->avatar)
-                                        <img src="{{Auth::user()->avatar}}" alt="#" class="rounded-circle avatar-sm">
+                                        <img src="{{ Auth::user()->avatar }}" alt="#"
+                                            class="rounded-circle avatar-sm">
                                     @else
                                         <i class="fa-solid fa-circle-user icon-sm text-dark"></i>
                                     @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{route('profile.show',Auth::id())}}" class="dropdown-item">
+
+                                    <a href="{{ route('admin.users.index') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-user-gear"></i>Admin
+                                    </a>
+                                    <hr class="dropdown-divider">
+
+                                    <a href="{{ route('profile.show', Auth::id()) }}" class="dropdown-item">
                                         <i class="fa-solid fa-user text-dark"></i> Profile
                                     </a>
 
@@ -105,7 +112,19 @@
         <main class="py-5">
             <div class="container">
                 <div class="row justify-content-center">
-                    {{-- <div class="col-3">admin controls</div> --}}
+                    @if (request()->is('admin/*'))
+                        <div class="col-3">
+                            <ul class="list-group">
+                                <a href="{{route('admin.users.index')}}" class="list-group-item active"> <i class="fa-solid fa-user"></i>
+                                    Users</a>
+                                <a href="" class="list-group-item"> <i class="fa-solid fa-newspaper"></i>
+                                    Posts</a>
+                                <a href="" class="list-group-item"> <i class="fa-solid fa-tags"></i>
+                                    Categories</a>
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="col-9">
                         @yield('content')
                     </div>

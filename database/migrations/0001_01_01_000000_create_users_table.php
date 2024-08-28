@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->default(2)->comment('1:admin 2:user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+         
             $table->rememberToken();
             $table->timestamps();
         });
