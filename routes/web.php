@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -51,6 +52,12 @@ Route::group(["middleware" => "auth"], function () {
             Route::get('/index',[UsersController::class,'index'])->name('index');
             Route::delete('/{id}/deactivate',[UsersController::class,'deactivate'])->name('deactivate');
             Route::patch('/{id}/activate',[UsersController::class,'activate'])->name('activate');
+        });
+
+        Route::group(["prefix"=>"posts","as"=>"posts."], function(){
+            Route::get('/index',[PostsController::class,'index'])->name('index');
+            Route::delete('/{id}/hide',[PostsController::class,'hide'])->name('hide');
+            Route::patch('/{id}/unhide',[PostsController::class,'unhide'])->name('unhide');
         });
 
 

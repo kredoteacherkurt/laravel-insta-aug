@@ -115,9 +115,9 @@
                     @if (request()->is('admin/*'))
                         <div class="col-3">
                             <ul class="list-group">
-                                <a href="{{route('admin.users.index')}}" class="list-group-item active"> <i class="fa-solid fa-user"></i>
+                                <a href="{{route('admin.users.index')}}" class="list-group-item {{ (request()->is('admin/users/index') ? 'active' : '' ) }} "> <i class="fa-solid fa-user"></i>
                                     Users</a>
-                                <a href="" class="list-group-item"> <i class="fa-solid fa-newspaper"></i>
+                                <a href="{{route('admin.posts.index')}}" class="list-group-item {{ (request()->is('admin/posts/index') ? 'active' : '' ) }}  "> <i class="fa-solid fa-newspaper"></i>
                                     Posts</a>
                                 <a href="" class="list-group-item"> <i class="fa-solid fa-tags"></i>
                                     Categories</a>
